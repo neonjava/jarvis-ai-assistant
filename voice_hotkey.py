@@ -34,7 +34,7 @@ class HotkeyVoiceAssistant:
         self.interpreter = CommandInterpreter(ai_engine, system)
 
         self.ctrl_pressed = False
-        self.cmd_pressed = False
+        self.alt_pressed = False
         self.is_recording = False
         self.recording_chunks = []
         self.loop = None
@@ -43,7 +43,7 @@ class HotkeyVoiceAssistant:
     async def initialize(self):
         setup_logging()
         print("\n" + "=" * 60)
-        print(" 🎙️  JARVIS HOTKEY VOICE ASSISTANT (Ctrl + WinKey)  🎙️")
+        print(" 🎙️  JARVIS HOTKEY VOICE ASSISTANT (Ctrl + Alt)  🎙️")
         print("=" * 60)
 
         print("\n[1/3] Loading Speech-to-Text model (Faster-Whisper)...")
@@ -55,11 +55,11 @@ class HotkeyVoiceAssistant:
         print("[3/3] Initializing AI Engine...")
         await self.ai_engine_init()
 
-        await self.tts.speak("JARVIS hotkey ready. Hold Ctrl and Windows key to speak.")
+        await self.tts.speak("JARVIS hotkey ready. Hold Ctrl and Alt to speak.")
 
         print("\n" + "─" * 60)
         print("💡 HOW TO USE:")
-        print("  1. Press & HOLD [Ctrl] + [WinKey / Super].")
+        print("  1. Press & HOLD [Ctrl] + [Alt].")
         print("  2. Speak your command into the microphone while holding keys.")
         print("  3. RELEASE the keys when done speaking.")
         print("  4. JARVIS will print your speech and reply aloud!")
@@ -143,19 +143,19 @@ class HotkeyVoiceAssistant:
     def on_press(self, key):
         if key in (keyboard.Key.ctrl, keyboard.Key.ctrl_l, keyboard.Key.ctrl_r):
             self.ctrl_pressed = True
-        if key in (keyboard.Key.cmd, keyboard.Key.cmd_l, keyboard.Key.cmd_r):
-            self.cmd_pressed = True
+        if key in (keyboard.Key.alt, keyboard.Key.alt_l, keyboard.Key.alt_r, keyboard.Key.alt_gr):
+            self.alt_pressed = True
 
-        if self.ctrl_pressed and self.cmd_pressed and not self.is_recording:
+        if self.ctrl_pressed and self.alt_pressed and not self.is_recording:
             self.start_recording()
 
     def on_release(self, key):
         if key in (keyboard.Key.ctrl, keyboard.Key.ctrl_l, keyboard.Key.ctrl_r):
             self.ctrl_pressed = False
-        if key in (keyboard.Key.cmd, keyboard.Key.cmd_l, keyboard.Key.cmd_r):
-            self.cmd_pressed = False
+        if key in (keyboard.Key.alt, keyboard.Key.alt_l, keyboard.Key.alt_r, keyboard.Key.alt_gr):
+            self.alt_pressed = False
 
-        if not (self.ctrl_pressed and self.cmd_pressed) and self.is_recording:
+        if not (self.ctrl_pressed and self.alt_pressed) and self.is_recording:
             self.stop_recording()
 
     def start_keyboard_listener(self):
