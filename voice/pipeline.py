@@ -323,6 +323,8 @@ class VoicePipeline:
         logger.info(f"🎤 Listening for wake word: '{settings.WAKE_WORD}'")
         await self.tts.speak("JARVIS online. How can I help?")
 
+        loop = asyncio.get_running_loop()
+
         def _on_audio(chunk: np.ndarray) -> None:
             self._wake_buffer.append(chunk)
             if len(self._wake_buffer) > self._wake_buffer_size:
@@ -331,9 +333,7 @@ class VoicePipeline:
             if self.state == VoiceState.LISTENING_WAKE:
                 combined = np.concatenate(self._wake_buffer, axis=0).flatten()
                 if self.wake_word.detect(combined):
-                    asyncio.run_coroutine_threadsafe(
-                        self._handle_wake(), asyncio.get_event_loop()
-                    )
+                    asyncio.run_coroutine_threadsafe(self._handle_wake(), loop)
 
         self.mic.start_stream(_on_audio)
 
