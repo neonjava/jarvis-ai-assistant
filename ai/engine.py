@@ -70,15 +70,19 @@ class OllamaProvider(BaseAIProvider):
         self.base_url = settings.OLLAMA_BASE_URL
         self.model = settings.OLLAMA_MODEL
         self.timeout = settings.OLLAMA_TIMEOUT
-        self._client = httpx.AsyncClient(
+
+    def _client(self) -> httpx.AsyncClient:
+        """Create a fresh client per request (safe after fork)."""
+        return httpx.AsyncClient(
             base_url=self.base_url,
             timeout=self.timeout,
         )
 
     async def is_available(self) -> bool:
         try:
-            resp = await self._client.get("/api/tags", timeout=5)
-            return resp.status_code == 200
+            async with self._client() as client:
+                resp = await client.get("/api/tags", timeout=5)
+                return resp.status_code == 200
         except Exception:
             return False
 
@@ -100,9 +104,10 @@ class OllamaProvider(BaseAIProvider):
         if tools:
             payload["tools"] = tools
 
-        resp = await self._client.post("/api/chat", json=payload)
-        resp.raise_for_status()
-        data = resp.json()
+        async with self._client() as client:
+            resp = await client.post("/api/chat", json=payload)
+            resp.raise_for_status()
+            data = resp.json()
 
         msg = data.get("message", {})
         return AIResponse(
@@ -128,24 +133,26 @@ class OllamaProvider(BaseAIProvider):
             },
         }
 
-        async with self._client.stream("POST", "/api/chat", json=payload) as resp:
-            resp.raise_for_status()
-            async for line in resp.aiter_lines():
-                if line:
-                    try:
-                        data = json.loads(line)
-                        chunk = data.get("message", {}).get("content", "")
-                        if chunk:
-                            yield chunk
-                        if data.get("done"):
-                            break
-                    except json.JSONDecodeError:
-                        continue
+        async with self._client() as client:
+            async with client.stream("POST", "/api/chat", json=payload) as resp:
+                resp.raise_for_status()
+                async for line in resp.aiter_lines():
+                    if line:
+                        try:
+                            data = json.loads(line)
+                            chunk = data.get("message", {}).get("content", "")
+                            if chunk:
+                                yield chunk
+                            if data.get("done"):
+                                break
+                        except json.JSONDecodeError:
+                            continue
 
     async def list_models(self) -> list[str]:
-        resp = await self._client.get("/api/tags")
-        resp.raise_for_status()
-        return [m["name"] for m in resp.json().get("models", [])]
+        async with self._client() as client:
+            resp = await client.get("/api/tags")
+            resp.raise_for_status()
+            return [m["name"] for m in resp.json().get("models", [])]
 
 
 # ── OpenAI Provider ───────────────────────────────────────────────────────────
@@ -255,6 +262,7 @@ class AIEngine:
 
     async def initialize(self) -> None:
         """Select best available provider."""
+        self._provider = None  # Reset before checking
         if settings.AI_PROVIDER == "ollama":
             if await self._ollama.is_available():
                 self._provider = self._ollama
@@ -286,10 +294,13 @@ class AIEngine:
         stream: bool = False,
     ) -> str:
         """Send a message and get a response."""
+        # Always try to get a provider, re-initializing if needed
         if not self._provider:
             await self.initialize()
-            if not self._provider:
-                return "I'm sorry, no AI provider is available right now."
+
+        # If still no provider, raise a clear error
+        if not self._provider:
+            return "No AI provider available. Make sure Ollama is running: `ollama serve`"
 
         self.memory.add("user", user_message)
         messages = self.memory.get_messages(extra_system=context)
