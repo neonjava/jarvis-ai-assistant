@@ -53,7 +53,7 @@ class WakeWordDetector:
             from openwakeword.model import Model
 
             self._model = Model(
-                wakeword_models=["hey_jarvis"],  # Uses built-in model
+                wakeword_model_paths=["hey_jarvis"],
                 inference_framework="onnx",
             )
             self._available = True
