@@ -43,7 +43,7 @@ class WakeWordDetector:
 
     def __init__(self) -> None:
         self.wake_word = settings.WAKE_WORD.lower()
-        self.threshold = 0.4  # Sensitive wake word threshold
+        self.threshold = 0.25  # Lower threshold for high sensitivity
         self._model = None
         self._available = False
 
@@ -67,8 +67,8 @@ class WakeWordDetector:
                 prediction = self._model.predict(audio_chunk)
                 scores = list(prediction.values())
                 max_s = max(scores) if scores else 0.0
-                if max_s > 0.2:
-                    logger.debug(f"Wake word confidence score: {max_s:.2f} (threshold: {self.threshold})")
+                if max_s > 0.05:
+                    logger.info(f"🎤 Wake word score: {max_s:.3f} (target threshold: {self.threshold})")
                 return any(s >= self.threshold for s in scores)
             except Exception as e:
                 logger.error(f"Wake word prediction error: {e}")
@@ -235,7 +235,7 @@ class MicRecorder:
             import sounddevice as sd
 
             sample_rate = self._sample_rate
-            silence_threshold = 80  # Lower RMS threshold for sensitive mic detection
+            silence_threshold = 20  # Extra sensitive silence threshold
             silence_samples = int(sample_rate * max_silence_ms / 1000)
             max_samples = sample_rate * max_duration_s
 
