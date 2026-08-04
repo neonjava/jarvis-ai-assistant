@@ -52,7 +52,7 @@ class WakeWordDetector:
             import openwakeword
             from openwakeword.model import Model
 
-            self._model = Model(inference_framework="onnx")
+            self._model = Model()
             self._available = True
             logger.info("✅ Wake word detector: OpenWakeWord")
         except ImportError:
