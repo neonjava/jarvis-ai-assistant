@@ -226,8 +226,8 @@ class MicRecorder:
         except Exception as e:
             logger.error(f"Microphone error: {e}")
 
-    async def record_utterance(self, max_silence_ms: int = 1500, max_duration_s: int = 30) -> bytes:
-        """Record until silence, return audio bytes."""
+    async def record_utterance(self, max_silence_ms: int = 4000, max_duration_s: int = 30) -> bytes:
+        """Record until 4 seconds of silence, return audio bytes."""
         try:
             import sounddevice as sd
 
@@ -343,7 +343,7 @@ class VoicePipeline:
         logger.info("Wake word detected! Recording command...")
         await self.tts.speak("Yes?")
 
-        audio_data = await self.mic.record_utterance()
+        audio_data = await self.mic.record_utterance(max_silence_ms=4000)
 
         self.state = VoiceState.PROCESSING
         text = await self.stt.transcribe(audio_data)
