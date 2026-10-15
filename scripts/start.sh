@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Start JARVIS API server as a background service
-cd PROJECT_ROOT/jarvis
-export PYTHONPATH=PROJECT_ROOT/jarvis
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$PROJECT_DIR"
+export PYTHONPATH="$PROJECT_DIR"
 
 # Start Ollama if not running
 if ! curl -sf http://localhost:11434/ > /dev/null 2>&1; then
