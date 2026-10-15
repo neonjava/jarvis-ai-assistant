@@ -1,1 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="172" viewBox="0 0 960 172" role="img" aria-label="Workflow: Voice or text request, Speech recognition and routing, Local AI or configured service, Speak response or perform action"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2860a8"/></marker></defs><rect width="960" height="172" fill="#ffffff"/><rect x="20" y="40" width="205" height="92" rx="12" fill="#eef5ff" stroke="#2860a8" stroke-width="2"/><text x="122" y="87" text-anchor="middle" fill="#18324d" font-family="Arial,sans-serif" font-size="15">Voice or text request</text><path d="M 230 86 h 20" stroke="#2860a8" stroke-width="3" marker-end="url(#arrow)"/><rect x="260" y="40" width="205" height="92" rx="12" fill="#eef5ff" stroke="#2860a8" stroke-width="2"/><text x="362" y="87" text-anchor="middle" fill="#18324d" font-family="Arial,sans-serif" font-size="15">Speech recognition and routing</text><path d="M 470 86 h 20" stroke="#2860a8" stroke-width="3" marker-end="url(#arrow)"/><rect x="500" y="40" width="205" height="92" rx="12" fill="#eef5ff" stroke="#2860a8" stroke-width="2"/><text x="602" y="87" text-anchor="middle" fill="#18324d" font-family="Arial,sans-serif" font-size="15">Local AI or configured service</text><path d="M 710 86 h 20" stroke="#2860a8" stroke-width="3" marker-end="url(#arrow)"/><rect x="740" y="40" width="205" height="92" rx="12" fill="#eef5ff" stroke="#2860a8" stroke-width="2"/><text x="842" y="87" text-anchor="middle" fill="#18324d" font-family="Arial,sans-serif" font-size="15">Speak response or perform action</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="410" viewBox="0 0 1200 410" role="img" aria-label="Workflow for JARVIS AI Assistant: Speak or type a request, Speech is interpreted, Local model or tool responds, Hear or see the result">
+<title>JARVIS AI Assistant workflow</title><desc>Speak or type a request → Speech is interpreted → Local model or tool responds → Hear or see the result</desc>
+<defs>
+  <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#091322"/><stop offset="1" stop-color="#111a2c"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#9b9dfc" stop-opacity=".22"/><stop offset="1" stop-color="#9b9dfc" stop-opacity="0"/></radialGradient>
+</defs>
+<style>
+text { font-family: Inter, Arial, sans-serif; }
+.flow { animation: move 1.2s linear infinite; }
+.beacon { animation: pulse 2.2s ease-in-out infinite; }
+@keyframes move { to { stroke-dashoffset: -20; } }
+@keyframes pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { .flow,.beacon { animation: none; } }
+</style>
+<rect width="1200" height="410" rx="24" fill="url(#bg)"/>
+<circle cx="1100" cy="0" r="270" fill="url(#glow)"/>
+<circle cx="0" cy="410" r="180" fill="url(#glow)" opacity=".4"/>
+<text x="34" y="42" fill="#9b9dfc" font-size="12" font-weight="700" letter-spacing="3">HOW IT WORKS</text>
+<text x="34" y="83" fill="#f3f6fb" font-size="31" font-weight="700">JARVIS AI Assistant</text>
+<rect x="925" y="38" width="240" height="36" rx="18" fill="#19273b" stroke="#33455d"/>
+<circle class="beacon" cx="946" cy="56" r="5" fill="#9b9dfc"/>
+<text x="963" y="61" fill="#c9d7e7" font-size="14">Desktop assistant</text>
+<path d="M290 220 H326" stroke="#9b9dfc" stroke-width="2" stroke-dasharray="5 5" class="flow"/>
+          <path d="m319 214 7 6-7 6" fill="none" stroke="#9b9dfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M584 220 H620" stroke="#9b9dfc" stroke-width="2" stroke-dasharray="5 5" class="flow"/>
+          <path d="m613 214 7 6-7 6" fill="none" stroke="#9b9dfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M878 220 H914" stroke="#9b9dfc" stroke-width="2" stroke-dasharray="5 5" class="flow"/>
+          <path d="m907 214 7 6-7 6" fill="none" stroke="#9b9dfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g class="card c0" aria-label="Step 1: Speak or type a request">
+          <rect x="32" y="112" width="258" height="218" rx="22" fill="#111d31" stroke="#324259" stroke-width="1.5"/>
+          <rect x="33" y="113" width="256" height="5" rx="3" fill="#9b9dfc" opacity=".9"/>
+          <circle cx="81" cy="167" r="32" fill="#9b9dfc" opacity=".13"/>
+          <g transform="translate(57 143)" fill="none" stroke="#9b9dfc" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="17" y="5" width="14" height="25" rx="7"/><path d="M11 22c0 18 26 18 26 0M24 36v8M16 44h16"/></g>
+          <text x="253" y="159" text-anchor="end" fill="#8090a7" font-size="15" font-weight="700">01</text>
+          <text x="54" y="238" fill="#f2f6fc" font-size="20" font-weight="650"><tspan x="54" dy="0">Speak or type a</tspan><tspan x="54" dy="26">request</tspan></text>
+          <rect x="54" y="300" width="117" height="1" fill="#9b9dfc" opacity=".65"/>
+          <text x="54" y="316" fill="#9aaec5" font-size="11" font-weight="700" letter-spacing="2">INPUT</text>
+        </g><g class="card c1" aria-label="Step 2: Speech is interpreted">
+          <rect x="326" y="112" width="258" height="218" rx="22" fill="#111d31" stroke="#324259" stroke-width="1.5"/>
+          <rect x="327" y="113" width="256" height="5" rx="3" fill="#9b9dfc" opacity=".9"/>
+          <circle cx="375" cy="167" r="32" fill="#9b9dfc" opacity=".13"/>
+          <g transform="translate(351 143)" fill="none" stroke="#9b9dfc" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 24h4l4-12 7 24 6-18 5 11 4-5h8"/></g>
+          <text x="547" y="159" text-anchor="end" fill="#8090a7" font-size="15" font-weight="700">02</text>
+          <text x="348" y="238" fill="#f2f6fc" font-size="20" font-weight="650"><tspan x="348" dy="0">Speech is</tspan><tspan x="348" dy="26">interpreted</tspan></text>
+          <rect x="348" y="300" width="135" height="1" fill="#9b9dfc" opacity=".65"/>
+          <text x="348" y="316" fill="#9aaec5" font-size="11" font-weight="700" letter-spacing="2">PROCESS</text>
+        </g><g class="card c2" aria-label="Step 3: Local model or tool responds">
+          <rect x="620" y="112" width="258" height="218" rx="22" fill="#111d31" stroke="#324259" stroke-width="1.5"/>
+          <rect x="621" y="113" width="256" height="5" rx="3" fill="#9b9dfc" opacity=".9"/>
+          <circle cx="669" cy="167" r="32" fill="#9b9dfc" opacity=".13"/>
+          <g transform="translate(645 143)" fill="none" stroke="#9b9dfc" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 9c-7-10-19 0-15 8-8 4-5 16 3 17-2 9 10 12 12 5 2 7 14 4 12-5 8-1 11-13 3-17 4-8-8-18-15-8v30M15 18l7 4m11-4-7 4M14 30l8-2m12 2-8-2"/></g>
+          <text x="841" y="159" text-anchor="end" fill="#8090a7" font-size="15" font-weight="700">03</text>
+          <text x="642" y="238" fill="#f2f6fc" font-size="20" font-weight="650"><tspan x="642" dy="0">Local model or tool</tspan><tspan x="642" dy="26">responds</tspan></text>
+          <rect x="642" y="300" width="126" height="1" fill="#9b9dfc" opacity=".65"/>
+          <text x="642" y="316" fill="#9aaec5" font-size="11" font-weight="700" letter-spacing="2">ACTION</text>
+        </g><g class="card c3" aria-label="Step 4: Hear or see the result">
+          <rect x="914" y="112" width="258" height="218" rx="22" fill="#111d31" stroke="#324259" stroke-width="1.5"/>
+          <rect x="915" y="113" width="256" height="5" rx="3" fill="#9b9dfc" opacity=".9"/>
+          <circle cx="963" cy="167" r="32" fill="#9b9dfc" opacity=".13"/>
+          <g transform="translate(939 143)" fill="none" stroke="#9b9dfc" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 19H5v10h5l11 9V10zM28 18c5 3 5 9 0 12M34 12c9 7 9 17 0 24"/></g>
+          <text x="1135" y="159" text-anchor="end" fill="#8090a7" font-size="15" font-weight="700">04</text>
+          <text x="936" y="238" fill="#f2f6fc" font-size="20" font-weight="650"><tspan x="936" dy="0">Hear or see the</tspan><tspan x="936" dy="26">result</tspan></text>
+          <rect x="936" y="300" width="126" height="1" fill="#9b9dfc" opacity=".65"/>
+          <text x="936" y="316" fill="#9aaec5" font-size="11" font-weight="700" letter-spacing="2">RESULT</text>
+        </g>
+<path d="M34 364 H1166" stroke="#2c3b51" stroke-width="1"/>
+<text x="34" y="387" fill="#91a4bb" font-size="13">01  START</text>
+<text x="1062" y="387" fill="#9b9dfc" font-size="13" font-weight="700">04  RESULT</text>
+</svg>
